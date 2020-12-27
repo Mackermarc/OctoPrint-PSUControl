@@ -535,6 +535,7 @@ class PSUControl(octoprint.plugin.StartupPlugin,
 
                 self._logger.debug("On system command returned: %s" % r)
             elif self.switchingMethod == 'GPIO':
+                self._printer.commands(self.onGCodeCommand) # added to also send M80/M81 when switching GPIO
                 if not self._hasGPIO:
                     return
 
@@ -583,6 +584,7 @@ class PSUControl(octoprint.plugin.StartupPlugin,
 
                 self._logger.debug("Off system command returned: %s" % r)
             elif self.switchingMethod == 'GPIO':
+                self._printer.commands(self.offGCodeCommand) # added to also send M80/M81 when switching GPIO
                 if not self._hasGPIO:
                     return
 
